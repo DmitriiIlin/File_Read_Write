@@ -1,4 +1,4 @@
-import random
+import random, sys
 
 def Create_files(): 
     for i in range(1,11):
@@ -13,10 +13,18 @@ def Read_information():
         a=input("Введите число в промежутке 1-10: ")
         if int(a)<=10 and int(a)>=1:
             file=open(str(a)+'.txt','rt')
-            s=file.readline()
+            try: 
+                s=file.readline()
+            except (SyntaxError or UnicodeError):
+                print("Ошибка даннных")
+                sys.exit()
             while s!='':
                 summa=summa+int(s.rstrip())
-                s=file.readline()
+                try:
+                    s=file.readline()
+                except (SyntaxError or UnicodeError):
+                    print("Ошибка даннных")
+                    sys.exit()
             file.close()
         else:
             print("Некорректный ввод")
